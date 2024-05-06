@@ -1,10 +1,11 @@
 'use client'
 
-import { Box, Flex, Heading, Text } from '@chakra-ui/react'
+import { Box, Circle, Flex, Heading, HStack, Tag, Text } from '@chakra-ui/react'
 import dayjs from 'dayjs'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
+import { DEFAULT_COLOR } from '../utils/theme'
 
 interface Props {
 	page: any
@@ -30,6 +31,12 @@ export const Hero = ({ page, accentColor }: Props) => {
 		// Cleanup function to remove event listener
 		return () => window.removeEventListener('resize', handleResize)
 	}, [])
+
+	const primaryTag = useMemo(() => {
+		const tag = page?.tags[0]
+		if (!tag) return undefined
+		return tag.charAt(0).toUpperCase() + tag.slice(1)
+	}, [page?.tags])
 
 	const bgImage =
 		page?.coverImage === '-' || !page?.coverImage
@@ -66,9 +73,19 @@ export const Hero = ({ page, accentColor }: Props) => {
 					w="100%"
 					p={{ base: 4, lg: 8 }}
 				>
-					<Text pb={1} fontSize={{ base: 'xs', md: 'sm', lg: 'md' }} color={'gray.200'}>
-						{formattedDate}
-					</Text>
+					<HStack w="100%" gap="6px" justify="flex-start" align="center">
+						{primaryTag && (
+							<>
+								<Tag size="sm" variant="solid" bg={accentColor ?? DEFAULT_COLOR} color="white">
+									{primaryTag}
+								</Tag>
+								<Circle size="4px" bg="gray.200"></Circle>
+							</>
+						)}
+						<Text pb={1} fontSize={{ base: 'xs', md: 'sm', lg: 'md' }} color={'gray.200'}>
+							{formattedDate}
+						</Text>
+					</HStack>
 					<Heading
 						lineHeight={1.2}
 						fontWeight="bold"

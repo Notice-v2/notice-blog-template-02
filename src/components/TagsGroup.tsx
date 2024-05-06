@@ -75,7 +75,7 @@ export const TagsGroup = ({ tags, activeTag, accentColor }: Props) => {
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			boxSizing="border-box"
-			maxW={{ base: '90%', md: '70%' }}
+			maxW={{ base: '90%', md: '100%' }}
 			width="fit-content"
 			position="relative"
 			showStart={showStart}

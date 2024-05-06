@@ -1,7 +1,7 @@
 'use client'
 
 import { useSelectedTag } from '@/providers/selectedTagProvider'
-import { Box, Divider, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
+import { Box, Divider, Flex, SimpleGrid } from '@chakra-ui/react'
 import { motion, useInView } from 'framer-motion'
 import { useMemo, useRef } from 'react'
 import { ArticleCard } from './ArticleCard'
@@ -64,16 +64,6 @@ export const ArticlesGrid = ({ pages, accentColor }: Props) => {
 				justify="space-between"
 				align="center"
 			>
-				<Heading
-					id="all-posts"
-					flexShrink={0}
-					fontWeight="bold"
-					as="h1"
-					fontSize={{ base: '2xl', lg: '4xl' }}
-					color="blackAlpha.800"
-				>
-					All posts
-				</Heading>
 				<TagsGroup tags={tags} activeTag={selectedTag} accentColor={accentColor} />
 			</Flex>
 			<Divider mb={12} orientation="horizontal" color="gray.400" />
