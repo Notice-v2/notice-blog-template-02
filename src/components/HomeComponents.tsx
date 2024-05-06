@@ -10,8 +10,7 @@ interface Props {
 
 export const HomeComponents = ({ data }: Props) => {
 	return (
-		<Flex w="100%" h="100vh" direction={{ base: 'column', lg: 'row' }}>
-			{/* Fixed Left Sidebar */}
+		<Flex gap={4} w="100%" h="100vh" direction={{ base: 'column', lg: 'row' }}>
 			<Hero page={data?.pages[0]} />
 
 			{/* Main Content Area */}

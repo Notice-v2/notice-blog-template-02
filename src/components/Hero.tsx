@@ -4,7 +4,7 @@ import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import dayjs from 'dayjs'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 interface Props {
 	page: any
@@ -13,7 +13,23 @@ interface Props {
 
 export const Hero = ({ page, accentColor }: Props) => {
 	const formattedDate = useMemo(() => dayjs(page?.createdAt).format('MMM D, YYYY'), [page?.createdAt])
-	console.log('page', page)
+
+	const [containerWidth, setContainerWidth] = useState(0)
+
+	useEffect(() => {
+		const handleResize = () => {
+			setContainerWidth(window.innerWidth / 2)
+		}
+
+		// Add event listener on client side
+		window.addEventListener('resize', handleResize)
+
+		// Initial calculation on component mount
+		handleResize()
+
+		// Cleanup function to remove event listener
+		return () => window.removeEventListener('resize', handleResize)
+	}, [])
 
 	const bgImage =
 		page?.coverImage === '-' || !page?.coverImage
@@ -27,13 +43,13 @@ export const Hero = ({ page, accentColor }: Props) => {
 				bgImage={bgImage}
 				bgSize="cover"
 				bgRepeat="no-repeat"
-				bgPosition="center center"
-				position={{ base: 'relative', lg: 'sticky' }}
+				bgPosition={{ base: 'top', lg: 'center' }}
+				position={{ base: 'inherit', lg: 'fixed' }}
 				left={0}
 				top={0}
 				borderRightWidth={1}
-				w="100%"
-				h="100%"
+				w={{ base: '100%', lg: containerWidth }}
+				h={{ base: '450px', lg: '100%' }}
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1, transition: { duration: 0.1, delay: 0.1, ease: [0, 0.71, 0.2, 1.01] } }}
 			>
@@ -48,7 +64,7 @@ export const Hero = ({ page, accentColor }: Props) => {
 					align="start"
 					justify="center"
 					w="100%"
-					p={8}
+					p={{ base: 4, lg: 8 }}
 				>
 					<Text pb={1} fontSize={{ base: 'xs', md: 'sm', lg: 'md' }} color={'gray.200'}>
 						{formattedDate}
@@ -57,7 +73,7 @@ export const Hero = ({ page, accentColor }: Props) => {
 						lineHeight={1.2}
 						fontWeight="bold"
 						as="h1"
-						fontSize={{ base: '3xl', md: 'xl', lg: '6xl' }}
+						fontSize={{ base: '4xl', lg: '6xl' }}
 						color="white"
 						noOfLines={2}
 					>

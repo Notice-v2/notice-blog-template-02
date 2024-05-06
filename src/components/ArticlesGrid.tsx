@@ -47,7 +47,6 @@ export const ArticlesGrid = ({ pages, accentColor }: Props) => {
 			whileInView={{ opacity: 1 }}
 			viewport={{ once: true }}
 			boxSizing="border-box"
-			overflow="auto"
 			mx="auto"
 			mb="10px"
 			px={6}
