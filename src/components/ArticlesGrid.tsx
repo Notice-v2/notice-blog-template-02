@@ -52,7 +52,7 @@ export const ArticlesGrid = ({ pages, accentColor }: Props) => {
 			pt={2}
 			pb={16}
 			w={{ base: '100%', lg: '50%' }}
-			maxW="900px"
+			maxW="1200px"
 			h="fit-content"
 			layout
 			layoutRoot
