@@ -57,16 +57,21 @@ export const ArticlesGrid = ({ pages, accentColor }: Props) => {
 			layout
 			layoutRoot
 		>
-			<Flex
-				mb={2}
-				gap={{ base: '6px', md: '12px' }}
-				direction={{ base: 'column', md: 'row' }}
-				justify="space-between"
-				align="center"
-			>
-				<TagsGroup tags={tags} activeTag={selectedTag} accentColor={accentColor} />
-			</Flex>
-			<Divider mb={12} orientation="horizontal" color="gray.400" />
+			{tags.length !== 0 && (
+				<>
+					{' '}
+					<Flex
+						mb={2}
+						gap={{ base: '6px', md: '12px' }}
+						direction={{ base: 'column', md: 'row' }}
+						justify="space-between"
+						align="center"
+					>
+						<TagsGroup tags={tags} activeTag={selectedTag} accentColor={accentColor} />
+					</Flex>
+					<Divider mb={12} orientation="horizontal" color="gray.400" />
+				</>
+			)}
 			<SimpleGrid
 				ref={ref}
 				as={motion.div}
