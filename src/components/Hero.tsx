@@ -76,7 +76,7 @@ export const Hero = ({ page, accentColor }: Props) => {
 					<HStack w="100%" gap="6px" justify="flex-start" align="center">
 						{primaryTag && (
 							<>
-								<Tag size="sm" variant="solid" bg={accentColor ?? DEFAULT_COLOR} color="white">
+								<Tag size="md" variant="solid" bg={accentColor ?? DEFAULT_COLOR} color="white">
 									{primaryTag}
 								</Tag>
 								<Circle size="4px" bg="gray.200"></Circle>
