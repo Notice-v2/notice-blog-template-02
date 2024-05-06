@@ -48,12 +48,12 @@ export const ArticlesGrid = ({ pages, accentColor }: Props) => {
 			viewport={{ once: true }}
 			boxSizing="border-box"
 			mx="auto"
-			mb="10px"
 			px={6}
 			pt={2}
-			pb={12}
+			pb={16}
 			w={{ base: '100%', lg: '50%' }}
 			maxW="900px"
+			h="fit-content"
 			layout
 			layoutRoot
 		>
