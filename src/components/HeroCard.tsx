@@ -1,10 +1,11 @@
 'use client'
+import { useIsHovered } from '@/hooks'
+import { DEFAULT_COLOR } from '@/utils/theme'
 import { Link } from '@chakra-ui/next-js'
-import { AbsoluteCenter, Box, Circle, Flex, Heading, HStack, Tag, Text } from '@chakra-ui/react'
+import { AbsoluteCenter, Box, Circle, Flex, Heading, HStack, Tag, Text, VStack } from '@chakra-ui/react'
 import dayjs from 'dayjs'
 import { motion } from 'framer-motion'
-import { useMemo } from 'react'
-import { DEFAULT_COLOR } from '../utils/theme'
+import { useMemo, useRef } from 'react'
 
 interface Props {
 	page: any
@@ -14,6 +15,7 @@ interface Props {
 	onNext: (e: React.MouseEvent<HTMLElement>) => void
 	onPrev: (e: React.MouseEvent<HTMLElement>) => void
 	currentIndex: number
+	showControls?: boolean
 }
 
 const variants = {
@@ -35,7 +37,16 @@ const variants = {
 	},
 }
 
-export const HeroCard = ({ page, containerWidth, isVisible, accentColor, onNext, onPrev, currentIndex }: Props) => {
+export const HeroCard = ({
+	page,
+	containerWidth,
+	isVisible,
+	accentColor,
+	onNext,
+	onPrev,
+	currentIndex,
+	showControls,
+}: Props) => {
 	const formattedDate = useMemo(() => dayjs(page?.createdAt).format('MMM D, YYYY'), [page?.createdAt])
 
 	const bgImage =
@@ -49,11 +60,15 @@ export const HeroCard = ({ page, containerWidth, isVisible, accentColor, onNext,
 		return tag.charAt(0).toUpperCase() + tag.slice(1)
 	}, [page?.tags])
 
+	const ref = useRef<HTMLDivElement>(null)
+	const isHovered = useIsHovered([ref]).some(Boolean)
+
 	if (!isVisible) return null
 
 	return (
 		<Link w="fit-content" h="fit-content" href={page?.slug || page?._id}>
 			<Box
+				ref={ref}
 				as={motion.div}
 				bgImage={bgImage}
 				bgSize="cover"
@@ -72,8 +87,6 @@ export const HeroCard = ({ page, containerWidth, isVisible, accentColor, onNext,
 			>
 				<Flex
 					as={motion.div}
-					position="absolute"
-					bottom={20}
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition="0.8 0.5 cubic-bezier(0, 0.71, 0.2, 1.01)"
@@ -81,37 +94,44 @@ export const HeroCard = ({ page, containerWidth, isVisible, accentColor, onNext,
 					align="start"
 					justify="center"
 					w="100%"
+					h="100%"
 					p={{ base: 4, lg: 8 }}
+					bgColor={isHovered ? 'none' : 'rgba(0,0,0,0.3)'}
+					backdropFilter={isHovered ? 'none' : 'blur(1px)'}
 				>
-					<HStack w="100%" gap="6px" justify="flex-start" align="center">
-						{primaryTag && (
-							<>
-								<Tag size="md" variant="solid" bg={page?.accentColor ?? DEFAULT_COLOR} color="white">
-									{primaryTag}
-								</Tag>
-								<Circle size="4px" bg="gray.200"></Circle>
-							</>
-						)}
-						<Text pb={1} fontSize={{ base: 'xs', md: 'sm', lg: 'md' }} color={'gray.200'}>
-							{formattedDate}
-						</Text>
-					</HStack>
-					<Heading
-						lineHeight={1.2}
-						fontWeight="bold"
-						as="h1"
-						fontSize={{ base: '4xl', lg: '6xl' }}
-						color="white"
-						noOfLines={2}
-					>
-						{page?.title}
-					</Heading>
+					<VStack position="absolute" bottom={20} spacing={4} align="start" w="100%">
+						<HStack w="100%" gap="6px" justify="flex-start" align="center">
+							{primaryTag && (
+								<>
+									<Tag size="md" variant="solid" bg={page?.accentColor ?? DEFAULT_COLOR} color="white">
+										{primaryTag}
+									</Tag>
+									<Circle size="4px" bg="gray.200"></Circle>
+								</>
+							)}
+							<Text pb={1} fontSize={{ base: 'xs', md: 'sm', lg: 'md' }} color={'gray.200'}>
+								{formattedDate}
+							</Text>
+						</HStack>
+						<Heading
+							lineHeight={1.2}
+							fontWeight="bold"
+							as="h1"
+							fontSize={{ base: '4xl', lg: '6xl' }}
+							color="white"
+							noOfLines={2}
+						>
+							{page?.title}
+						</Heading>
+					</VStack>
 				</Flex>
 
-				<HStack position="absolute" bottom={10} w="100%" justify="center" align="center" gap={2}>
-					<SliderButton onClick={onNext} accentColor={accentColor} isActive={currentIndex === 0} />
-					<SliderButton onClick={onPrev} accentColor={accentColor} isActive={currentIndex === 1} />
-				</HStack>
+				{showControls && (
+					<HStack position="absolute" bottom={10} w="100%" justify="center" align="center" gap={2}>
+						<SliderButton onClick={onNext} accentColor={accentColor} isActive={currentIndex === 0} />
+						<SliderButton onClick={onPrev} accentColor={accentColor} isActive={currentIndex === 1} />
+					</HStack>
+				)}
 			</Box>
 		</Link>
 	)

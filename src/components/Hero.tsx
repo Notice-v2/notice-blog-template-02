@@ -58,6 +58,7 @@ export const Hero = ({ pages }: Props) => {
 						onNext={nextSlide}
 						onPrev={prevSlide}
 						currentIndex={index}
+						showControls={pages.length > 1}
 					/>
 				)
 			})}
