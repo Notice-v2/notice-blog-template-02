@@ -1,9 +1,9 @@
 'use client'
 
-import { useIsHovered } from '@/hooks'
 import { DEFAULT_COLOR } from '@/utils/theme'
 import { Link } from '@chakra-ui/next-js'
 import { Circle, Flex, Heading, Tag, Text, VStack } from '@chakra-ui/react'
+import { useIsHovered } from '@notice-org/renderer-helper'
 import dayjs from 'dayjs'
 import { motion } from 'framer-motion'
 import { useMemo, useRef } from 'react'

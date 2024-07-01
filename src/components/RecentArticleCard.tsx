@@ -1,7 +1,7 @@
 'use client'
 
-import { useIsHovered } from '@/hooks'
 import { Link as ChakraLink, Text, VStack } from '@chakra-ui/react'
+import { useIsHovered } from '@notice-org/renderer-helper'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRef } from 'react'

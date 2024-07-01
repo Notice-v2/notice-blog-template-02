@@ -1,10 +1,10 @@
-import { useHorizontalScrollShadow } from '@/hooks'
 import { ArrowLeft, ArrowRight } from '@/icons'
 import { useSelectedTag } from '@/providers/selectedTagProvider'
 import { DEFAULT_COLOR } from '@/utils/theme'
 import { Circle, HStack, Tag, chakra } from '@chakra-ui/react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { useHorizontalScrollShadow } from '@notice-org/renderer-helper'
 import { motion } from 'framer-motion'
 import { useCallback, useMemo, useRef } from 'react'
 
@@ -122,6 +122,7 @@ export const TagsGroup = ({ tags, activeTag, accentColor }: Props) => {
 				{filteredTags.map((tag) => {
 					return (
 						<Tag
+							id={tag}
 							as={motion.span}
 							variants={item}
 							p={2}

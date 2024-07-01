@@ -1,8 +1,8 @@
 'use client'
 
-import { useHorizontalScrollShadow, useIsHovered } from '@/hooks'
 import { ArrowLeft, ArrowRight } from '@/icons'
 import { Box, Flex, Heading } from '@chakra-ui/react'
+import { useHorizontalScrollShadow, useIsHovered } from '@notice-org/renderer-helper'
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { RecentArticleCard } from './RecentArticleCard'

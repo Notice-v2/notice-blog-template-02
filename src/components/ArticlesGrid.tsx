@@ -85,7 +85,7 @@ export const ArticlesGrid = ({ pages, accentColor }: Props) => {
 				justifyContent="stretch"
 			>
 				{filteredArticles.map((page) => (
-					<ArticleCard key={page.id} page={page} accentColor={accentColor} />
+					<ArticleCard key={page._id} page={page} accentColor={accentColor} />
 				))}
 			</SimpleGrid>
 		</Box>
