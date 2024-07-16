@@ -1,5 +1,4 @@
 import { CustomCodeInjector } from '@/components/CustomCodeInjector'
-import { Navbar } from '@/components/Navbar'
 import { NoticeLabel } from '@/components/NoticeLabel'
 import { Providers } from '@/providers'
 import { API, extractProjectID } from '@/tools/api'
@@ -24,7 +23,6 @@ export default async function RootLayout({
 
 			<body>
 				<Providers>
-					<Navbar meta={projectData?.metadata} />
 					{children}
 					<NoticeLabel shouldHide={hideCreatedWithNotice} />
 				</Providers>
